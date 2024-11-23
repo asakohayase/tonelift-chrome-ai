@@ -1,15 +1,14 @@
 from pydantic import BaseModel
-from typing import Optional, Dict, List
-from enum import Enum
+from typing import Optional, List
 
-class ResponseType(Enum):
-    TEXT = "text"
-    VOICE = "voice"
+class Context(BaseModel):
+    situation: str
+    importance: str
+    additionalContext: Optional[str] = None
 
 class InputRequest(BaseModel):
-    text: Optional[str] = None
-    context: Dict[str, str]
-    response_type: ResponseType = ResponseType.TEXT
+    text: str
+    context: Context
 
 class AnalysisResult(BaseModel):
     tone: str
