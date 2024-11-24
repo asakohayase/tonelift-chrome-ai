@@ -1,13 +1,13 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Loader2, MessageSquare, Zap } from 'lucide-react'
+import { Loader2, Zap, ArrowRight } from 'lucide-react'
 
 interface TransformResponse {
   original_text: string
@@ -33,6 +33,8 @@ export default function ToneTransformer() {
   const [isLoading, setIsLoading] = useState(false)
   const [result, setResult] = useState<TransformResponse | null>(null)
   const [error, setError] = useState('')
+
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -69,27 +71,38 @@ export default function ToneTransformer() {
   }
 
   return (
-    <div className="container mx-auto min-h-screen bg-white px-4 py-8">
-      <Card className="mx-auto w-full max-w-2xl border shadow-md">
-        <CardHeader className="rounded-t-xl bg-[#2e6f40]  text-white shadow-md">
-          <CardTitle className="flex items-center text-2xl font-semibold">
-            <MessageSquare className="mr-2 size-6" />
-            Text Tone Transformer
-          </CardTitle>
-          <CardDescription className="text-white">
-            Refine your message for impactful communication
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="pt-6">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div className="container mx-auto px-4 py-8">
+      {/* Main Header */}
+      <div className="mb-8 text-center">
+      <h1 className="text-4xl font-bold tracking-tight text-white">
+        ToneLift{' '}
+        <span className="bg-gradient-to-r from-lime-400 via-green-500 to-green-600 bg-clip-text text-transparent">
+          AI
+        </span>
+      </h1>
+      <p className="mt-2 text-gray-300">
+        Elevate your communication with AI-powered tone transformation
+      </p>
+    </div>
+
+      <div className="relative grid gap-6 md:grid-cols-2">
+        {/* Input Card */}
+        <Card className="border border-gray-500 bg-white/95 shadow-lg backdrop-blur-sm">
+          <CardHeader className="rounded-t-xl bg-black text-white">
+            <CardTitle className="text-xl">Transform Your Message</CardTitle>
+            <CardDescription className="text-gray-100">
+              Customize your message settings
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6 pt-6">
+            <div className="grid gap-4">
               <div className="space-y-2">
-                <Label htmlFor="situation" className="text-lg font-medium text-[#2e6f40]">Situation</Label>
-                <Select value={situation} onValueChange={setSituation} >
-                  <SelectTrigger id="situation" className="focus-visible:ring-[#2e6f40]" >
+                <Label htmlFor="situation" className="text-black">Situation</Label>
+                <Select value={situation} onValueChange={setSituation}>
+                  <SelectTrigger id="situation">
                     <SelectValue placeholder="Select situation" />
                   </SelectTrigger>
-                  <SelectContent >
+                  <SelectContent>
                     <SelectItem value="client">Business Client (B2B)</SelectItem>
                     <SelectItem value="customer_service">Customer Service (B2C)</SelectItem>
                     <SelectItem value="external_comms">Brand Communications</SelectItem>
@@ -101,12 +114,12 @@ export default function ToneTransformer() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="importance" className="text-lg font-medium text-[#2e6f40]">
+                <Label htmlFor="importance" className="text-black">
                   Importance
-                  <span className="ml-1 text-sm text-[#2e6f40]">(Affects tone)</span>
+                  <span className="ml-1 text-sm">(Affects tone)</span>
                 </Label>
                 <Select value={importance} onValueChange={setImportance}>
-                  <SelectTrigger id="importance" className="focus-visible:ring-[#2e6f40]">
+                  <SelectTrigger id="importance">
                     <SelectValue placeholder="Select importance" />
                   </SelectTrigger>
                   <SelectContent>
@@ -119,34 +132,35 @@ export default function ToneTransformer() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="customContext" className="text-lg font-medium text-[#2e6f40]">
+              <Label htmlFor="context" className="text-black">
                 Additional Context
-                <span className="ml-1 text-sm text-[#2e6f40]">(Optional)</span>
+                <span className="ml-1 text-sm">(Optional)</span>
               </Label>
               <Textarea
-                id="customContext"
+                id="context"
                 value={customContext}
                 onChange={(e) => setCustomContext(e.target.value)}
-                placeholder="Add any additional context or specific requirements..."
-                className="min-h-[80px] focus-visible:ring-[#2e6f40]"
+                placeholder="Add any additional context..."
+                className="min-h-[80px]"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="text" className="text-lg font-medium text-[#2e6f40]">Text to Transform</Label>
+              <Label htmlFor="text" className="text-black">Message to Transform</Label>
               <Textarea
                 id="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Enter your text here..."
-                className="min-h-[100px] focus-visible:ring-[#2e6f40]"
+                className="min-h-[120px]"
                 required
               />
             </div>
 
             <Button 
-              type="submit" 
-              className="w-full rounded bg-[#2e6f40] px-4 py-2 font-semibold text-white transition-colors duration-300 hover:bg-[#2e6f40]" 
+              type="submit"
+              onClick={handleSubmit}
+              className="w-full bg-gradient-to-r from-lime-400 via-green-500 to-green-600 text-white hover:from-lime-500 hover:via-green-600 hover:to-green-700"
               disabled={isLoading}
             >
               {isLoading ? (
@@ -157,54 +171,128 @@ export default function ToneTransformer() {
               ) : (
                 <>
                   <Zap className="mr-2 size-4" />
-                  Transform Text
+                  Transform Message
                 </>
               )}
             </Button>
-          </form>
-        </CardContent>
-      </Card>
-
-      {error && (
-        <Alert variant="destructive" className="mx-auto mt-6 max-w-2xl border border-red-200">
-          <AlertTitle className="text-lg font-semibold">Error</AlertTitle>
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      )}
-
-      {result && (
-        <Card className="mx-auto mt-6 max-w-2xl border border-[#2e6f40] shadow-md">
-          <CardHeader className="bg-[#2e6f40] text-white">
-            <CardTitle className="text-xl font-semibold">
-              Transformation Result
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6 pt-6">
-            <div className="bg-sand-100 space-y-2 rounded-md p-4">
-              <h3 className="text-lg font-semibold text-[#2e6f40]">Original Text:</h3>
-              <p className="text-sm text-teal-900">{result.original_text}</p>
-            </div>
-
-            <div className="space-y-2 rounded-md bg-teal-50 p-4">
-              <h3 className="text-lg font-semibold text-[#2e6f40]">Transformed Text:</h3>
-              <p className="text-sm font-medium text-teal-900">{result.transformed_text}</p>
-            </div>
-
-            <div className="bg-sand-50 space-y-2 rounded-md p-4">
-              <h3 className="text-lg font-semibold text-[#2e6f40]">Analysis:</h3>
-              <p className="text-sm">Tone: <span className="font-medium text-teal-700">{result.analysis.tone}</span></p>
-              <p className="text-sm">Confidence: <span className="font-medium text-teal-700">
-                {(result.analysis.confidence * 100).toFixed(1)}%</span></p>
-              <h4 className="mt-2 font-semibold text-[#2e6f40]">Improvements:</h4>
-              <ul className="list-inside list-disc space-y-1 text-sm">
-                {result.analysis.improvements.map((improvement, index) => (
-                  <li key={index} className="text-[#2e6f40]">{improvement}</li>
-                ))}
-              </ul>
-            </div>
           </CardContent>
         </Card>
-      )}
+
+        {/* Arrow between cards */}
+        <div className="absolute left-1/2 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 md:block">
+          <div className="flex size-12 items-center justify-center rounded-full bg-black text-white shadow-lg">
+            <ArrowRight className="size-6" />
+          </div>
+        </div>
+
+      {/* Result Card */}
+      <Card className="border border-gray-500 bg-white/95 shadow-lg backdrop-blur-sm">
+        <CardHeader className="rounded-t-xl bg-black text-white">
+          <CardTitle className="text-xl">Transformation Result</CardTitle>
+          <CardDescription className="text-gray-100">
+            Enhanced message output
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6 pt-6">
+          {result ? (
+            <div className="space-y-4">
+              {/* Transformed Text Section */}
+              <div className="space-y-2">
+                <Label className="text-black">Transformed Message</Label>
+                <div className="rounded-lg border border-gray-200 p-4">
+                  <div className="prose prose-gray max-w-none text-gray-700">
+                    <p>
+                      {(() => {
+                        try {
+                          // Try to parse the JSON
+                          const jsonStart = result.transformed_text.indexOf('{');
+                          const jsonEnd = result.transformed_text.indexOf('I made these changes');
+                          const jsonStr = result.transformed_text.slice(jsonStart, jsonEnd > -1 ? jsonEnd : undefined).trim();
+                          const parsed = JSON.parse(jsonStr);
+                          return parsed.text;
+                        } catch (error:unknown) {
+                          console.error('Failed to parse response:', error);
+                          return result.transformed_text;
+                        }
+                      })()}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Analysis Section */}
+              <div className="space-y-2">
+                <Label className="text-black">Analysis</Label>
+                <div className="rounded-lg border border-gray-200 p-4">
+                  <div className="space-y-4">
+                    {/* Tone Analysis */}
+                    <div className="rounded-md  p-3">
+                      <p className="text-sm">
+                        <span className="font-medium text-gray-700">Detected Tone: </span>
+                        <span className="text-gray-600">{result.analysis.tone.charAt(0).toUpperCase() + result.analysis.tone.slice(1)}</span>
+                      </p>
+                    </div>
+                    
+                    {/* Improvements */}
+                    <div className="space-y-2">
+                      <h4 className="text-sm font-medium text-gray-700">Key Improvements:</h4>
+                      <ul className="space-y-2">
+                        {(() => {
+                          try {
+                            const jsonStart = result.transformed_text.indexOf('{');
+                            const jsonEnd = result.transformed_text.indexOf('I made these changes');
+                            const jsonStr = result.transformed_text.slice(jsonStart, jsonEnd > -1 ? jsonEnd : undefined).trim();
+                            const parsed = JSON.parse(jsonStr);
+                            return parsed.improvements.map((improvement: string, index: number) => (
+                              <li 
+                                key={index} 
+                                className="flex gap-2 rounded-md bg-green-50 p-2 text-sm text-gray-600"
+                              >
+                                <span className="select-none text-green-500">✓</span>
+                                <span>{improvement}</span>
+                              </li>
+                            ));
+                          } catch (error:unknown) {
+                            console.error('Failed to parse response:', error);
+                            return null;
+                          }
+                        })()}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            // Empty state - just labels without placeholder content
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label className="text-black">Transformed Message</Label>
+                <div className="rounded-lg border border-gray-200 bg-gray-50 p-4"></div>
+              </div>
+
+              <div className="space-y-2">
+                <Label className="text-black">Analysis</Label>
+                <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+                  <div className="space-y-4">
+                    <div className="rounded-md bg-gray-100 p-3"></div>
+                    <div className="space-y-2">
+                      <h4 className="text-sm font-medium text-gray-700">Key Improvements:</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+        {error && (
+          <Alert variant="destructive" className="border border-red-200">
+            <AlertTitle className="text-lg font-semibold">Error</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+      </div>
     </div>
-  )
+  );
 }
