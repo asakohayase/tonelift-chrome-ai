@@ -1,7 +1,8 @@
+import json
 import os
 from openai import OpenAI
 from typing import Dict
-from src.models import Context, InputRequest, ProcessedResponse, AnalysisResult
+from src.models import Context, InputRequest, ProcessedResponse
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -12,10 +13,8 @@ class ToneProcessor:
     def __init__(self):
         api_key = os.getenv("NGC_API_KEY")
         org_id = os.getenv("NGC_ORG_ID")
-        if not api_key:
-            raise ValueError("NGC_API_KEY not found in environment variables")
-        if not org_id:
-            raise ValueError("NGC_ORG_ID not found in environment variables")
+        if not api_key or not org_id:
+            raise ValueError("NGC_API_KEY and NGC_ORG_ID are required")
 
         self.client = OpenAI(
             base_url="https://integrate.api.nvidia.com/v1",
@@ -26,72 +25,33 @@ class ToneProcessor:
 
     def _create_context_prompt(self, context: Context) -> str:
         """Create a context prompt from the Context object"""
+        # Get tone guideline based on formality
+        tone_guideline = (
+            "professional yet empathetic"
+            if context.formality == "formal"
+            else "friendly and understanding"
+        )
+
         context_parts = [
             f"Situation: {context.situation}",
-            f"Importance Level: {context.importance}",
+            f"Tone: {tone_guideline}",
         ]
-
         if context.additionalContext:
             context_parts.append(f"Additional Context: {context.additionalContext}")
-
         return "\n".join(context_parts)
 
     def process_input(self, request: InputRequest) -> ProcessedResponse:
-        """Process the input text by analyzing tone and transforming the text"""
+        """Process the input text"""
         if not request.text:
             raise ValueError("Input text is required")
 
-        # Analyze the original tone
-        tone_analysis = self._analyze_tone(request.text)
-
-        # Transform the text
         transformed = self._transform_text(request)
 
-        # Create analysis result
-        analysis = AnalysisResult(
-            tone=tone_analysis["tone"],
-            confidence=tone_analysis["confidence"],
-            improvements=transformed.get("improvements", []),
-        )
-
-        # Create and return the processed response
         return ProcessedResponse(
             original_text=request.text,
             transformed_text=transformed.get("text", request.text),
-            analysis=analysis,
+            improvements=transformed.get("improvements", []),
         )
-
-    def _analyze_tone(self, text: str) -> Dict:
-        """Analyze tone using NVIDIA model"""
-        try:
-            completion = self.client.chat.completions.create(
-                model=self.MODEL_ID,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "You are a helpful assistant that analyzes the tone of text.",
-                    },
-                    {
-                        "role": "user",
-                        "content": f"Analyze the tone of this text: {text}",
-                    },
-                ],
-                temperature=0.2,
-                top_p=0.7,
-                max_tokens=1024,
-            )
-
-            response_text = completion.choices[0].message.content
-
-            if "tone:" in response_text.lower():
-                tone = response_text.split("tone:")[-1].strip().split("\n")[0]
-            else:
-                tone = "neutral"
-
-            return {"tone": tone, "confidence": 0.85}
-        except Exception as e:
-            print(f"Error in tone analysis: {str(e)}")
-            return {"tone": "neutral", "confidence": 0.5}
 
     def _transform_text(self, request: InputRequest) -> Dict:
         """Transform text using NVIDIA model"""
@@ -103,7 +63,10 @@ class ToneProcessor:
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are a helpful assistant that transforms text to be more professional and positive.",
+                        "content": """You are an expert at transforming text to be more positive, empathetic, and appropriate.
+                        Show understanding of emotions and perspectives while being constructive.
+                        Respond with ONLY a JSON object containing 'text' and 'improvements' fields.
+                        Do not add any explanatory text before or after the JSON.""",
                     },
                     {
                         "role": "user",
@@ -113,35 +76,39 @@ class ToneProcessor:
 
                         Original text: {request.text}
                         
-                        Task: Based on the context provided, rewrite this text to be more professional and positive 
-                        while maintaining the core message. Adjust the tone according to the situation 
-                        and importance level.
-
-                        Format: {{
-                            "text": "transformed text here",
-                            "improvements": ["improvement 1", "improvement 2"]
-                        }}
+                        Transform this text to:
+                        1. Show understanding and empathy
+                        2. Maintain a constructive approach
+                        3. Be positive while acknowledging concerns
+                        4. Keep the core message clear
+                        5. Match the specified tone
                         """,
                     },
                 ],
                 temperature=0.3,
-                top_p=0.8,
                 max_tokens=1024,
             )
 
-            response_text = completion.choices[0].message.content
+            response_text = completion.choices[0].message.content.strip()
 
             try:
-                # Try to parse as JSON first
-                import json
-
-                parsed_response = json.loads(response_text)
-                return parsed_response
+                # Try to parse JSON, removing any non-JSON text
+                json_start = response_text.find("{")
+                json_end = response_text.rfind("}") + 1
+                if json_start >= 0 and json_end > json_start:
+                    json_str = response_text[json_start:json_end]
+                    return json.loads(json_str)
+                else:
+                    return {
+                        "text": response_text,
+                        "improvements": ["Text transformed with empathy"],
+                    }
             except json.JSONDecodeError:
                 return {
                     "text": response_text,
-                    "improvements": ["Text transformed for more professional tone"],
+                    "improvements": ["Text transformed with empathy"],
                 }
+
         except Exception as e:
             print(f"Error in text transformation: {str(e)}")
             return {

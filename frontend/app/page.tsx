@@ -12,23 +12,19 @@ import { Loader2, Zap, ArrowRight } from 'lucide-react'
 interface TransformResponse {
   original_text: string
   transformed_text: string
-  analysis: {
-    tone: string
-    confidence: number
-    improvements: string[]
-  }
+  improvements: string[];
 }
 
 interface Context {
   situation: string
-  importance: string
+  formality: string
   additionalContext?: string
 }
 
 export default function ToneTransformer() {
   const [text, setText] = useState('')
   const [situation, setSituation] = useState('client')
-  const [importance, setImportance] = useState('high')
+  const [formality, setFormality] = useState('high')
   const [customContext, setCustomContext] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [result, setResult] = useState<TransformResponse | null>(null)
@@ -43,7 +39,7 @@ export default function ToneTransformer() {
 
     const context: Context = {
       situation,
-      importance,
+      formality,
       additionalContext: customContext.trim() || undefined
     }
 
@@ -108,24 +104,23 @@ export default function ToneTransformer() {
                     <SelectItem value="external_comms">Brand Communications</SelectItem>
                     <SelectItem value="feedback_to_team">Team Feedback</SelectItem>
                     <SelectItem value="feedback_to_management">Management Feedback</SelectItem>
+                    <SelectItem value="personal">Personal (Family/Friends)</SelectItem> 
                     <SelectItem value="other">Other Professional</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="importance" className="text-black">
-                  Importance
-                  <span className="ml-1 text-sm">(Affects tone)</span>
+                <Label htmlFor="formality" className="text-black">
+                  Tone
                 </Label>
-                <Select value={importance} onValueChange={setImportance}>
-                  <SelectTrigger id="importance">
-                    <SelectValue placeholder="Select importance" />
+                <Select value={formality} onValueChange={setFormality}>
+                  <SelectTrigger id="formality">
+                    <SelectValue placeholder="Select one" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="high">High (Formal)</SelectItem>
-                    <SelectItem value="medium">Medium (Standard)</SelectItem>
-                    <SelectItem value="low">Low (Casual)</SelectItem>
+                    <SelectItem value="formal">Formal</SelectItem>
+                    <SelectItem value="casual">Casual</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -202,19 +197,7 @@ export default function ToneTransformer() {
                 <div className="rounded-lg border border-gray-200 p-4">
                   <div className="prose prose-gray max-w-none text-gray-700">
                     <p>
-                      {(() => {
-                        try {
-                          // Try to parse the JSON
-                          const jsonStart = result.transformed_text.indexOf('{');
-                          const jsonEnd = result.transformed_text.indexOf('I made these changes');
-                          const jsonStr = result.transformed_text.slice(jsonStart, jsonEnd > -1 ? jsonEnd : undefined).trim();
-                          const parsed = JSON.parse(jsonStr);
-                          return parsed.text;
-                        } catch (error:unknown) {
-                          console.error('Failed to parse response:', error);
-                          return result.transformed_text;
-                        }
-                      })()}
+                    {result.transformed_text}
                     </p>
                   </div>
                 </div>
@@ -225,38 +208,20 @@ export default function ToneTransformer() {
                 <Label className="text-black">Analysis</Label>
                 <div className="rounded-lg border border-gray-200 p-4">
                   <div className="space-y-4">
-                    {/* Tone Analysis */}
-                    <div className="rounded-md  p-3">
-                      <p className="text-sm">
-                        <span className="font-medium text-gray-700">Detected Tone: </span>
-                        <span className="text-gray-600">{result.analysis.tone.charAt(0).toUpperCase() + result.analysis.tone.slice(1)}</span>
-                      </p>
-                    </div>
-                    
+
                     {/* Improvements */}
                     <div className="space-y-2">
                       <h4 className="text-sm font-medium text-gray-700">Key Improvements:</h4>
-                      <ul className="space-y-2">
-                        {(() => {
-                          try {
-                            const jsonStart = result.transformed_text.indexOf('{');
-                            const jsonEnd = result.transformed_text.indexOf('I made these changes');
-                            const jsonStr = result.transformed_text.slice(jsonStart, jsonEnd > -1 ? jsonEnd : undefined).trim();
-                            const parsed = JSON.parse(jsonStr);
-                            return parsed.improvements.map((improvement: string, index: number) => (
-                              <li 
-                                key={index} 
-                                className="flex gap-2 rounded-md bg-green-50 p-2 text-sm text-gray-600"
-                              >
-                                <span className="select-none text-green-500">✓</span>
-                                <span>{improvement}</span>
-                              </li>
-                            ));
-                          } catch (error:unknown) {
-                            console.error('Failed to parse response:', error);
-                            return null;
-                          }
-                        })()}
+                      <ul className="space-y-2">                    
+                      {result.improvements.map((improvement, index) => (
+                    <li 
+                      key={index} 
+                      className="flex gap-2 rounded-md bg-green-50 p-2 text-sm text-gray-600"
+                    >
+                      <span className="select-none text-green-500">✓</span>
+                      <span>{improvement}</span>
+                    </li>
+                  ))}
                       </ul>
                     </div>
                   </div>

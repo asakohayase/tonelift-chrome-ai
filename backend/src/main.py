@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 import json
 from dotenv import load_dotenv
 import os
-import requests
 from src.models import InputRequest, ProcessedResponse, Context
 from src.processor import ToneProcessor
 from src.middleware import setup_middlewares
@@ -21,35 +20,34 @@ app = FastAPI()
 # Configure middleware
 setup_middlewares(app)
 
+
 @app.post("/process/", response_model=ProcessedResponse)
-async def process_input(
-    text: str = Form(...),
-    context: str = Form(...)
-):
+async def process_input(text: str = Form(...), context: str = Form(...)):
     try:
         context_dict = json.loads(context)
         if not text:
             raise ValueError("Text is required")
-            
+
         # Ensure context has required fields with defaults
         context_dict = {
             "situation": context_dict.get("situation", "other"),
-            "importance": context_dict.get("importance", "medium"),
-            "additionalContext": context_dict.get("additionalContext", "")
+            "formality": context_dict.get("formality", "formal"),
+            "additionalContext": context_dict.get("additionalContext", ""),
         }
-        
+
         # Create a validated Context object
         context_obj = Context(**context_dict)
-        
+
         processor = ToneProcessor()
-        request = InputRequest(
-            text=text,
-            context=context_dict
-        )
-        
+        request = InputRequest(text=text, context=context_obj)
+
         response = processor.process_input(request)
-        return response
-        
+        return ProcessedResponse(
+            original_text=response.original_text,
+            transformed_text=response.transformed_text,
+            improvements=response.improvements,
+        )
+
     except json.JSONDecodeError:
         raise HTTPException(status_code=400, detail="Invalid context format")
     except ValueError as ve:
@@ -59,6 +57,8 @@ async def process_input(
         print(error_message)  # For logging
         raise HTTPException(status_code=500, detail=error_message)
 
+
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
