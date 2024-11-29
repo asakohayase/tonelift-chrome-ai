@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Loader2, Zap, ArrowRight } from 'lucide-react'
+import VoiceProcessor from '@/components/ui/VoiceProcessor';
 
 interface TransformResponse {
   original_text: string
@@ -65,6 +66,11 @@ export default function ToneTransformer() {
       setIsLoading(false)
     }
   }
+
+  const handleTranscriptComplete = (transcript: string) => {
+    setText(transcript);
+  };
+
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -149,6 +155,10 @@ export default function ToneTransformer() {
                 placeholder="Enter your text here..."
                 className="min-h-[120px]"
                 required
+              />
+              <VoiceProcessor 
+                onTranscriptComplete={handleTranscriptComplete}
+                isDisabled={isLoading}
               />
             </div>
 
