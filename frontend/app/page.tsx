@@ -49,7 +49,7 @@ export default function ToneTransformer() {
     formData.append('context', JSON.stringify(context))
 
     try {
-      const response = await fetch('http://localhost:8000/process/', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/process/`, {
         method: 'POST',
         body: formData,
       })
