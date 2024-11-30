@@ -9,9 +9,6 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci
 
-# Copy environment files
-COPY .env.local ./
-
 # Copy application code
 COPY . .
 
@@ -28,11 +25,9 @@ COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/.env.local ./
 
-# Set environment variables
+# Set environment to production
 ENV NODE_ENV=production
-ENV NEXT_PUBLIC_API_URL=http://localhost:8000
 
 # Expose the port
 EXPOSE 3000

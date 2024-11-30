@@ -1,0 +1,36 @@
+{
+    "family": "tonelift-ai",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "256",
+    "memory": "512",
+    "executionRoleArn": "arn:aws:iam::216989112030:role/ecsTaskExecutionRole",
+    "containerDefinitions": [
+        {
+            "name": "backend",
+            "image": "216989112030.dkr.ecr.us-west-2.amazonaws.com/tonelift-ai-backend:latest",
+            "portMappings": [
+                {
+                    "containerPort": 8000,
+                    "hostPort": 8000,
+                    "protocol": "tcp"
+                }
+            ],
+            "environment": [
+                {
+                    "name": "CORS_ORIGINS",
+                    "value": "*"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/tonelift-ai",
+                    "awslogs-region": "us-west-2",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            },
+            "essential": true
+        }
+    ]
+}

@@ -1,56 +1,49 @@
-# Docker Setup Instructions
+# Docker and AWS Setup Instructions
 
-## Prerequisites
+## Local Development
+### Prerequisites
 - Docker
 - Docker Compose
-- Poetry (for Python dependencies)
+- Poetry (Python package manager)
+- AWS CLI v2
 
-## Initial Setup
-1. Install Poetry:
-   ```bash
-   curl -sSL https://install.python-poetry.org | python3 -
-   ```
-
-2. Initialize Poetry in backend:
-   ```bash
-   cd backend
-   poetry init
-   poetry add fastapi uvicorn python-multipart
-   ```
-
-## Quick Start
+### Local Setup
 1. Start the application:
    ```bash
    docker-compose up --build
    ```
 
-2. Access the services:
+2. Access local services:
    - Frontend: http://localhost:3000
    - Backend: http://localhost:8000
-   - API Docs: http://localhost:8000/docs
 
-3. Stop the application:
+### AWS Deployment Steps
+1. Configure AWS CLI with SSO:
    ```bash
-   docker-compose down
+   aws configure sso
+   aws sso login --profile AdministratorAccess-[AccountID]
    ```
 
-## Development
-- Backend files are mounted as a volume, so changes are reflected immediately
-- Frontend requires rebuild for changes: `docker-compose up --build frontend`
+2. Create ECR repositories:
+   ```bash
+   aws ecr create-repository --repository-name tonelift-ai-frontend
+   aws ecr create-repository --repository-name tonelift-ai-backend
+   ```
+
+3. Set up IAM roles and policies:
+   ```bash
+   cd aws-config
+   aws iam create-role --role-name ecsTaskExecutionRole --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"ecs-tasks.amazonaws.com"},"Action":"sts:AssumeRole"}]}'
+   aws iam put-role-policy --role-name ecsTaskExecutionRole --policy-name ecsTaskExecutionPolicy --policy-document file://task-execution-policy.json
+   ```
+
+4. Create ECS resources:
+   ```bash
+   aws ecs create-cluster --cluster-name tonelift-ai-cluster
+   ```
 
 ## Useful Commands
-- View service status:
-  ```bash
-  docker-compose ps
-  ```
-
-- View service logs:
-  ```bash
-  docker-compose logs backend
-  docker-compose logs frontend
-  ```
-
-- Remove all containers and volumes:
-  ```bash
-  docker-compose down -v
-  ```
+- View status: `docker-compose ps`
+- View logs: `docker-compose logs [service]`
+- Rebuild: `docker-compose up --build`
+- Remove all: `docker-compose down -v`

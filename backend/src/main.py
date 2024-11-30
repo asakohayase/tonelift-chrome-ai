@@ -21,6 +21,16 @@ app = FastAPI()
 setup_middlewares(app)
 
 
+@app.get("/")
+async def root():
+    return {
+        "status": "online",
+        "endpoints": {
+            "process": "/process/ (POST)",
+        },
+    }
+
+
 @app.post("/process/", response_model=ProcessedResponse)
 async def process_input(text: str = Form(...), context: str = Form(...)):
     try:
