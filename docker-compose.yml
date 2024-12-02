@@ -23,7 +23,8 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - CORS_ORIGINS=http://localhost:3000
+      # - CORS_ORIGINS=http://localhost:3000
+      - CORS_ORIGINS=https://tonelift-ai.vercel.app
     volumes:
       - ./backend:/app
     networks:
