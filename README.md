@@ -34,6 +34,7 @@
 <!-- ABOUT THE PROJECT -->
 <h2 id="problem-statement"> 🎯 Problem Statement</h2>
 Communication challenges are prevalent across business and personal contexts, with professionals often struggling the most due to high-stakes situations:
+
 ### Business Contexts
 
 * Negotiating with clients and stakeholders
@@ -52,6 +53,7 @@ Crafting these messages takes significant time and mental energy to balance dire
 
 <!-- FEATURES-->
 <h2 id="features"> 🛠️ Features</h2>
+
 * Contextual Adaptation: Adjust tone based on different situations (e.g., client communication, personal messages).
 * Empathetic and Constructive Feedback: Automatically suggest improvements.
 * Voice Input: Use voice-to-text to input your message.
@@ -76,12 +78,12 @@ Crafting these messages takes significant time and mental energy to balance dire
 
 * Chrome Canary (Version 131.0.6776.0 or higher)
 * Enable Chrome AI flags:
-1. Navigate to chrome://flags/#optimization-guide-on-device-model
-2. Enable "BypassPerfRequirement"
-3. Navigate to chrome://flags/#prompt-api-for-gemini-nano
-4. Enable the flag
-5. Navigate to chrome://flags/#rewriter-api-for-gemini-nano
-6. Enable the flag
+  1. Navigate to chrome://flags/#optimization-guide-on-device-model
+  2. Enable "BypassPerfRequirement" and relaunch
+  3. Navigate to chrome://flags/#prompt-api-for-gemini-nano
+  4. Enable the flag and relaunch
+  5. Navigate to chrome://flags/#rewriter-api-for-gemini-nano
+  6. Enable the flag and relaunch
 
 
 * Installation
