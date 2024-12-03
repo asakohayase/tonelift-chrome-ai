@@ -51,7 +51,7 @@ Crafting these messages takes significant time and mental energy to balance dire
 
 
 <!-- FEATURES-->
-<h2 id="features"> 🛠️ Features</h2>2>
+<h2 id="features"> 🛠️ Features</h2>
 * Contextual Adaptation: Adjust tone based on different situations (e.g., client communication, personal messages).
 * Empathetic and Constructive Feedback: Automatically suggest improvements.
 * Voice Input: Use voice-to-text to input your message.
