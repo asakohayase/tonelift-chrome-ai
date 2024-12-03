@@ -26,20 +26,13 @@
     <li><a href="#contact">Why ToneLift AI</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
-    - [Problem Statement](#problem-statement)
-    - [Features](#features)
-    - [Built With](#built-with)
-    - [Getting Started](#getting-started)
-    - [Why ToneLift AI](#why-tonelift-ai)
-    - [Contact](#contact)
-    - [Contributing](#contributing)
   </ol>
 </details>
 
 
 
 <!-- ABOUT THE PROJECT -->
-## 🎯 Problem Statement
+<h2 id="problem-statement"> 🎯 Problem Statement</h2>
 Communication challenges are prevalent across business and personal contexts, with professionals often struggling the most due to high-stakes situations:
 ### Business Contexts
 
