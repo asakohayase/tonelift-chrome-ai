@@ -178,10 +178,11 @@ export default function ToneTransformer() {
                 id="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder="Enter your text here..."
+                placeholder="Enter your text in English..."
                 className="min-h-[120px]"
                 required
               />
+              <p className="text-xs text-gray-500">Currently supports English text only</p>
               <VoiceProcessor 
                 onTranscriptComplete={handleTranscriptComplete}
                 isDisabled={isLoading}
