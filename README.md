@@ -77,6 +77,8 @@ Crafting these messages takes significant time and mental energy to balance dire
 <h2 id="getting-started">🚀 Getting Started</h2>
 
 * Chrome Canary (Version 131.0.6776.0 or higher)
+  Download from: https://www.google.com/chrome/canary/
+  *Make sure you have at least 22GB of free storage space for the AI model
 * Enable Chrome AI flags:
   1. Navigate to chrome://flags/#optimization-guide-on-device-model
   2. Enable "BypassPerfRequirement" and relaunch
