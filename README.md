@@ -26,6 +26,13 @@
     <li><a href="#contact">Why ToneLift AI</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
+    - [Problem Statement](#problem-statement)
+    - [Features](#features)
+    - [Built With](#built-with)
+    - [Getting Started](#getting-started)
+    - [Why ToneLift AI](#why-tonelift-ai)
+    - [Contact](#contact)
+    - [Contributing](#contributing)
   </ol>
 </details>
 
