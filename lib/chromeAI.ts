@@ -1,5 +1,3 @@
-// app/lib/chromeAI.ts
-
 export type Situation = 'client' | 'customer_service' | 'external_comms' | 
                      'feedback_to_team' | 'feedback_to_management' | 
                      'personal' | 'complaint' | 'other';
