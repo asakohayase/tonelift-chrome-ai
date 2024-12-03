@@ -6,14 +6,13 @@
   ToneLift AI is an innovative web application that leverages Chrome's built-in AI capabilities to transform your communications into more empathetic, effective messages. Whether you're handling challenging business communications, providing team feedback, or sensitive family discussions, ToneLift AI helps you maintain professional relationships while delivering your message clearly.
 </div>
 
-
-
+<br />
+<br />
 
 <img width="1325" alt="Screenshot 2024-12-02 at 8 26 28 PM" src="https://github.com/user-attachments/assets/0624666b-13dc-4fa6-83cc-cb740d9f923c">
 
-
-
-
+<br />
+<br />
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -65,10 +64,11 @@ Crafting these messages takes significant time and mental energy to balance dire
 <!-- BUILT WITH -->
 <h2 id="built-with">🧠 Built With</h2>
 
-* Frontend - Next.js, Typescript and Tailwind CSS
-* Chrome's Built-in AI APIs
-  *Rewriter API for message transformation
-  *Prompt API for improvement analysis
+* Frontend: Next.js, Typescript and Tailwind CSS
+* AI functionalities:
+  * Rewriter API for message transformation
+  * Prompt API for improvement analysis
+  * Gemini Nano for enabling on-device natural language processing and advanced text rewriting
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -106,6 +106,7 @@ npm run dev
 
 <!-- WHY TONELIFT AI -->
 <h2 id="why-tonelift-ai">🏆 Why ToneLift AI?</h2>
+
 ### Real-World Impact
 
 * Time Savings: Reduce message crafting time by 70%
