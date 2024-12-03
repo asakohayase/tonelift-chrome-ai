@@ -3,7 +3,7 @@
 
 <div align="left">
   <p>
-  ToneLift AI is a web application designed to enhance the tone of your messages. It uses advanced language models to transform your text into a more empathetic, professional, or customer-friendly tone, depending on the specified context.
+  ToneLift AI is an innovative web application that leverages Chrome's built-in AI capabilities to transform your communications into more empathetic, effective messages. Whether you're handling challenging business communications, providing team feedback, or sensitive family discussions, ToneLift AI helps you maintain professional relationships while delivering your message clearly.
 </div>
 
 
@@ -15,8 +15,11 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#problem-statement">Problem Statement</a> </li>
     <li><a href="#features">Features</a> </li>
     <li><a href="#built-with">Built With</a></li>
+    <li><a href="#getting-started">Getting Started</a></li>
+    <li><a href="#contact">Why ToneLift AI</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -25,7 +28,26 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## Features
+## 🎯 Problem Statement
+Communication challenges are prevalent across business and personal contexts, with professionals often struggling the most due to high-stakes situations:
+### Business Contexts
+
+* Negotiating with clients and stakeholders
+* Providing constructive feedback to team members
+* Delivering difficult decisions or news to employees
+* Handling internal conflicts professionally
+
+### Additional Applications
+
+* Filing effective customer complaints
+* Navigating sensitive family discussions
+
+
+Crafting these messages takes significant time and mental energy to balance directness with empathy. ToneLift AI not only helps transform your messages but also helps you develop better communication skills over time by learning from the improvements suggested.
+
+
+<!-- FEATURES-->
+## 🛠️ Features
 * Contextual Adaptation: Adjust tone based on different situations (e.g., client communication, personal messages).
 * Empathetic and Constructive Feedback: Automatically suggest improvements.
 * Voice Input: Use voice-to-text to input your message.
@@ -33,85 +55,69 @@
 <br />
 
 
-
-
-## Built With
+<!-- BUILT WITH -->
+## 🧠 Built With
 
 * Frontend - Next.js, Typescript and Tailwind CSS
-* Backend - Python and Fast API
-* AI Integration - NVIDIA NGC model
-* Deployment - Docker, Docker Compose
+* Chrome's Built-in AI APIs
+  *Rewriter API for message transformation
+  *Prompt API for improvement analysis
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 <!-- GETTING STARTED -->
-## Getting Started
+### 🚀 Getting Started
 
-### Prerequisites
+* Chrome Canary (Version 131.0.6776.0 or higher)
+* Enable Chrome AI flags:
+1. Navigate to chrome://flags/#optimization-guide-on-device-model
+2. Enable "BypassPerfRequirement"
+3. Navigate to chrome://flags/#prompt-api-for-gemini-nano
+4. Enable the flag
+5. Navigate to chrome://flags/#rewriter-api-for-gemini-nano
+6. Enable the flag
 
-- Docker and Docker Compose
-- Git
-- Node.js (for local development)
 
-### Installation
+* Installation
+```
+# Clone the repository
+git clone https://github.com/yourusername/tonelift-ai.git
 
-1. Clone the repository and navigate to the directory:
-```bash
-git clone https://github.com/asakohayase/tonelift-ai.git
-cd Lifestoryteller
+# Navigate to project directory
+cd tonelift-ai
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-2. Create `.env.frontend`:
-```env
-NGC_API_KEY=your_ngc_api_key
-NGC_ORG_ID=your_ngc_org_id
-NGC_MODEL_ID=meta/llama-3.1-405b-instruct
-```
-
-3. Create `.env.backend`:
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8000
-```
-
-### Running with Docker
-
-1. Build and start all services:
-```bash
-docker compose up --build
-```
-
-2. Or build and run in detached mode (background):
-```bash
-docker compose up -d --build
-```
-
-3. View running containers:
-```bash
-docker ps
-```
-
-4. View logs:
-```bash
-# All containers
-docker compose logs
-
-# Specific service
-docker compose logs backend
-docker compose logs frontend
-```
-
-5. Stop services:
-```bash
-docker compose down
-```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+<!-- WHY TONELIFT AI -->
+## 🏆 Why ToneLift AI?
+### Real-World Impact
 
-The application will be available at:
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:8000
+* Time Savings: Reduce message crafting time by 70%
+* Consistency: Maintain professional communication standards across all channels
+* Stress Reduction: Confidently handle difficult communications
+* Relationship Building: Strengthen professional relationships through improved communication
+
+### Innovation
+
+*On-Device Processing: Leverages Chrome's built-in AI for privacy and speed
+*Context-Aware: Adapts to different business situations
+*Voice Integration: Modern input methods for efficiency
+
+### Hybrid AI Approach
+
+*AI-Human Collaboration: AI suggests improvements while maintaining the user's voice
+*Contextual Understanding: Combines user context with AI capabilities
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
    
 
 <!-- CONTRIBUTING -->
@@ -126,7 +132,7 @@ Stars ⭐ from you will brighten our day! Thanks for checking out our project.
 4. Push to the Branch (`git push origin feature/NewFeature`)
 5. Open a Pull Request
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- CONTACT -->
