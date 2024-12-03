@@ -61,7 +61,7 @@ Crafting these messages takes significant time and mental energy to balance dire
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- BUILT WITH -->
-<h2 id="built-with">## 🧠 Built With</h2>
+<h2 id="built-with">🧠 Built With</h2>
 
 * Frontend - Next.js, Typescript and Tailwind CSS
 * Chrome's Built-in AI APIs
@@ -113,9 +113,9 @@ npm run dev
 
 ### Innovation
 
-*On-Device Processing: Leverages Chrome's built-in AI for privacy and speed
-*Context-Aware: Adapts to different business situations
-*Voice Integration: Modern input methods for efficiency
+* On-Device Processing: Leverages Chrome's built-in AI for privacy and speed
+* Context-Aware: Adapts to different business situations
+* Voice Integration: Modern input methods for efficiency
 
 ### Hybrid AI Approach
 
