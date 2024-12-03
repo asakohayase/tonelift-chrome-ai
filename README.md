@@ -109,7 +109,7 @@ npm run dev
 
 ### Real-World Impact
 
-* Time Savings: Reduce message crafting time by 70%
+* Time Savings: Reduce message crafting time
 * Consistency: Maintain professional communication standards across all channels
 * Stress Reduction: Confidently handle difficult communications
 * Relationship Building: Strengthen professional relationships through improved communication
