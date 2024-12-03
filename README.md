@@ -23,7 +23,7 @@
     <li><a href="#features">Features</a> </li>
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="#contact">Why ToneLift AI</a></li>
+    <li><a href="#why-tonelift-ai">Why ToneLift AI</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -51,7 +51,7 @@ Crafting these messages takes significant time and mental energy to balance dire
 
 
 <!-- FEATURES-->
-## 🛠️ Features
+<h2 id="features"> 🛠️ Features</h2>2>
 * Contextual Adaptation: Adjust tone based on different situations (e.g., client communication, personal messages).
 * Empathetic and Constructive Feedback: Automatically suggest improvements.
 * Voice Input: Use voice-to-text to input your message.
@@ -61,7 +61,7 @@ Crafting these messages takes significant time and mental energy to balance dire
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- BUILT WITH -->
-## 🧠 Built With
+<h2 id="built-with">## 🧠 Built With</h2>
 
 * Frontend - Next.js, Typescript and Tailwind CSS
 * Chrome's Built-in AI APIs
@@ -72,7 +72,7 @@ Crafting these messages takes significant time and mental energy to balance dire
 
 
 <!-- GETTING STARTED -->
-### 🚀 Getting Started
+<h2 id="getting-started">🚀 Getting Started</h2>
 
 * Chrome Canary (Version 131.0.6776.0 or higher)
 * Enable Chrome AI flags:
@@ -103,7 +103,7 @@ npm run dev
 
 
 <!-- WHY TONELIFT AI -->
-## 🏆 Why ToneLift AI?
+<h2 id="why-tonelift-ai">🏆 Why ToneLift AI?</h2>
 ### Real-World Impact
 
 * Time Savings: Reduce message crafting time by 70%
@@ -126,7 +126,7 @@ npm run dev
    
 
 <!-- CONTRIBUTING -->
-## Contributing
+<h2 id="contributing"> Contributing</h2>
 
 If you have an idea to improve this, kindly fork the repository and open a pull request. We also welcome enhancement suggestions filed as issues. 
 Stars ⭐ from you will brighten our day! Thanks for checking out our project.
@@ -141,7 +141,7 @@ Stars ⭐ from you will brighten our day! Thanks for checking out our project.
 
 
 <!-- CONTACT -->
-## Contact
+<h2 id="contact">Contact</h2>
 
 Asako Hayase- [LinkedIn](https://www.linkedin.com/in/asako-hayase-924508ba/)
 
