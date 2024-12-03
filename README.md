@@ -5,10 +5,9 @@
   <p>
   ToneLift AI is an innovative web application that leverages Chrome's built-in AI capabilities to transform your communications into more empathetic, effective messages. Whether you're handling challenging business communications, providing team feedback, or sensitive family discussions, ToneLift AI helps you maintain professional relationships while delivering your message clearly.
 </div>
-
-<br />
-<br />
 <a href="https://tonelift-chrome-ai-asakohayase-asakohayases-projects.vercel.app/" target="_blank">Visit The Website via Chrome Canary</a>
+<br />
+<br />
 
 <img width="1325" alt="Screenshot 2024-12-02 at 8 26 28 PM" src="https://github.com/user-attachments/assets/0624666b-13dc-4fa6-83cc-cb740d9f923c">
 
