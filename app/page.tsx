@@ -136,6 +136,7 @@ export default function ToneTransformer() {
                     <SelectItem value="feedback_to_team">Team Feedback</SelectItem>
                     <SelectItem value="feedback_to_management">Management Feedback</SelectItem>
                     <SelectItem value="personal">Personal (Family/Friends)</SelectItem> 
+                    <SelectItem value="complaint">Customer Complaint</SelectItem>
                     <SelectItem value="other">Other Professional</SelectItem>
                   </SelectContent>
                 </Select>

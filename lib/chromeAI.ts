@@ -2,7 +2,7 @@
 
 export type Situation = 'client' | 'customer_service' | 'external_comms' | 
                      'feedback_to_team' | 'feedback_to_management' | 
-                     'personal' | 'other';
+                     'personal' | 'complaint' | 'other';
 
 export type Formality = 'formal' | 'casual';
 
@@ -66,6 +66,7 @@ private readonly situationContexts: Record<Situation, string> = {
   'feedback_to_team': "Change to constructive, supportive team feedback",
   'feedback_to_management': "Adapt to respectful, solution-focused upward feedback",
   'personal': "Modify to caring, considerate personal message",
+  'complaint': "Modify to caring, considerate personal message",
   'other': "Transform to professional, empathetic communication"
 };
 
