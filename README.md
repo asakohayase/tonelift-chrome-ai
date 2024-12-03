@@ -1,6 +1,5 @@
 <a id="readme-top"></a>
 <h1> ToneLift AI </h1>
-<a href="https://tonelift-chrome-ai-asakohayase-asakohayases-projects.vercel.app/" target="_blank">Visit The Website</a>
 
 <div align="left">
   <p>
@@ -9,6 +8,7 @@
 
 <br />
 <br />
+<a href="https://tonelift-chrome-ai-asakohayase-asakohayases-projects.vercel.app/" target="_blank">Visit The Website via Chrome Canary</a>
 
 <img width="1325" alt="Screenshot 2024-12-02 at 8 26 28 PM" src="https://github.com/user-attachments/assets/0624666b-13dc-4fa6-83cc-cb740d9f923c">
 
