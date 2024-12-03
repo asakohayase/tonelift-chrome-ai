@@ -54,6 +54,7 @@ Crafting these messages takes significant time and mental energy to balance dire
 <br />
 <br />
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- BUILT WITH -->
 ## 🧠 Built With
@@ -114,8 +115,8 @@ npm run dev
 
 ### Hybrid AI Approach
 
-*AI-Human Collaboration: AI suggests improvements while maintaining the user's voice
-*Contextual Understanding: Combines user context with AI capabilities
+* AI-Human Collaboration: AI suggests improvements while maintaining the user's voice
+* Contextual Understanding: Combines user context with AI capabilities
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
    
