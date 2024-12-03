@@ -86,12 +86,11 @@ def generate_docker_compose():
     build:
       context: ./frontend
       dockerfile: Dockerfile
-      platforms:
-        - linux/amd64
+
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_API_URL=http://backend:8000    
     depends_on:
       - backend
     networks:
@@ -101,12 +100,11 @@ def generate_docker_compose():
     build:
       context: ./backend
       dockerfile: Dockerfile
-      platforms:
-        - linux/amd64
+
     ports:
       - "8000:8000"
     environment:
-      - CORS_ORIGINS=http://localhost:3000
+      - CORS_ORIGINS=http://localhost:3000,http://frontend:3000
     volumes:
       - ./backend:/app
     networks:
@@ -120,40 +118,39 @@ networks:
     print("✅ Generated docker-compose.yml")
 
 
-def generate_aws_config():
-    os.makedirs("aws-config", exist_ok=True)
-
-    task_policy = """{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ecr:GetAuthorizationToken",
-                "ecr:BatchCheckLayerAvailability",
-                "ecr:GetDownloadUrlForLayer",
-                "ecr:BatchGetImage",
-                "logs:CreateLogStream",
-                "logs:PutLogEvents"
-            ],
-            "Resource": "*"
-        }
-    ]
-}"""
-    with open("aws-config/task-execution-policy.json", "w") as f:
-        f.write(task_policy)
-    print("✅ Generated task-execution-policy.json")
+# def generate_aws_config():
+#     os.makedirs("aws-config", exist_ok=True)
+#
+#     task_policy = """{
+#     "Version": "2012-10-17",
+#     "Statement": [
+#         {
+#             "Effect": "Allow",
+#             "Action": [
+#                 "ecr:GetAuthorizationToken",
+#                 "ecr:BatchCheckLayerAvailability",
+#                 "ecr:GetDownloadUrlForLayer",
+#                 "ecr:BatchGetImage",
+#                 "logs:CreateLogStream",
+#                 "logs:PutLogEvents"
+#             ],
+#             "Resource": "*"
+#         }
+#     ]
+# }"""
+#     with open("aws-config/task-execution-policy.json", "w") as f:
+#         f.write(task_policy)
+#     print("✅ Generated task-execution-policy.json")
 
 
 def generate_readme():
-    content = """# Docker and AWS Setup Instructions
+    content = """# Docker Setup Instructions
 
 ## Local Development
 ### Prerequisites
 - Docker
 - Docker Compose
 - Poetry (Python package manager)
-- AWS CLI v2
 
 ### Local Setup
 1. Start the application:
@@ -164,31 +161,6 @@ def generate_readme():
 2. Access local services:
    - Frontend: http://localhost:3000
    - Backend: http://localhost:8000
-
-### AWS Deployment Steps
-1. Configure AWS CLI with SSO:
-   ```bash
-   aws configure sso
-   aws sso login --profile AdministratorAccess-[AccountID]
-   ```
-
-2. Create ECR repositories:
-   ```bash
-   aws ecr create-repository --repository-name tonelift-ai-frontend
-   aws ecr create-repository --repository-name tonelift-ai-backend
-   ```
-
-3. Set up IAM roles and policies:
-   ```bash
-   cd aws-config
-   aws iam create-role --role-name ecsTaskExecutionRole --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"ecs-tasks.amazonaws.com"},"Action":"sts:AssumeRole"}]}'
-   aws iam put-role-policy --role-name ecsTaskExecutionRole --policy-name ecsTaskExecutionPolicy --policy-document file://task-execution-policy.json
-   ```
-
-4. Create ECS resources:
-   ```bash
-   aws ecs create-cluster --cluster-name tonelift-ai-cluster
-   ```
 
 ## Useful Commands
 - View status: `docker-compose ps`
@@ -207,7 +179,7 @@ def main():
     generate_frontend_dockerfile()
     generate_backend_dockerfile()
     generate_docker_compose()
-    generate_aws_config()
+    # generate_aws_config()  # Commented out AWS config generation
     generate_readme()
 
     current_file = __file__

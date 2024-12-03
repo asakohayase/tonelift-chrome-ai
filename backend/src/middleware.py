@@ -17,9 +17,8 @@ def setup_middlewares(app):
     app.add_middleware(
         CORSMiddleware,
         allow_origins=[
-            "https://tonelift-ai.vercel.app",  # Production Vercel URL
-            "http://34.216.79.83:8000",  # Backend URL
             "http://localhost:3000",  # Local development
+            "http://frontend:3000",  # Docker container name
         ],
         allow_credentials=True,
         allow_methods=["*"],
