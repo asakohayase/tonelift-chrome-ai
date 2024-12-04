@@ -5,7 +5,7 @@
   <p>
   ToneLift AI is an innovative web application that leverages Chrome's built-in AI capabilities to transform your communications into more empathetic, effective messages. Whether you're handling challenging business communications, providing team feedback, or sensitive family discussions, ToneLift AI helps you maintain professional relationships while delivering your message clearly.
 </div>
-
+<a href="https://tonelift-chrome-ai-asakohayase-asakohayases-projects.vercel.app/" target="_blank">Visit The Website via Chrome Canary</a>
 <br />
 <br />
 
@@ -77,6 +77,10 @@ Crafting these messages takes significant time and mental energy to balance dire
 <h2 id="getting-started">🚀 Getting Started</h2>
 
 * Chrome Canary (Version 131.0.6776.0 or higher)
+  
+  Download from: https://www.google.com/chrome/canary/
+  
+  *Make sure you have at least 22GB of free storage space for the AI model
 * Enable Chrome AI flags:
   1. Navigate to chrome://flags/#optimization-guide-on-device-model
   2. Enable "BypassPerfRequirement" and relaunch
