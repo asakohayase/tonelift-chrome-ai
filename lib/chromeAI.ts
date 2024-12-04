@@ -110,8 +110,9 @@ export class ChromeAIServiceImpl implements ChromeAIService {
     try {
       const context = `${this.situationContexts[options.situation]}. 
                       Make it ${options.formality === 'formal' ? 'professional and polite' : 'friendly and warm'}. 
-                      Use empathetic language. Show understanding. Focus on solutions.
-                      Respond in English only.
+                      Use empathetic language. Show understanding. Focus on solutions. 
+                      Respond in English only. Output only the transformed message without any additional commentary, notes, or explanations.
+                    Return the message exactly as it should be sent.
                       ${options.additionalContext || ''}`;
       
       const rewrittenText = await this.rewriter.rewrite(text, { context });
