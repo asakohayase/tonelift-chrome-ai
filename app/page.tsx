@@ -11,8 +11,6 @@ import { Loader2, Zap, ArrowRight } from 'lucide-react'
 import VoiceProcessor from '@/components/ui/VoiceProcessor';
 import { ChromeAIServiceImpl, Formality, Situation, TransformResponse } from '@/lib/chromeAI';
 
-
-
 export default function ToneTransformer() {
   const [text, setText] = useState('')
   const [situation, setSituation] = useState<Situation>('client')
@@ -29,7 +27,9 @@ export default function ToneTransformer() {
     const initAI = async () => {
       try {
         const service = new ChromeAIServiceImpl();
-        const available = await service.initialize();
+        const available = await service.initialize({ 
+          temperature: 0.7
+        });
         if (mounted) {
           if (available) {
             setAIService(service);
